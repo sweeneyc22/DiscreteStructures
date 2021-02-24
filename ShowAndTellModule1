@@ -1,0 +1,84 @@
+package com.company;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Random;
+
+
+/**
+ * Develop a program that randomly selects a total charge.
+ * Randomly select a payment in dollars and cents that exceeds change
+ * Calculate change in pennies, nickels, dimes, quarters, fives, and twenties
+ */
+
+public class Main {
+    public static void main(String[] args) {
+        //Randomly select a total charge (in cents)
+        Random rand = new Random();
+        int charge = rand.nextInt(100000);
+        //Printing charge using java.math.BigDecimal
+        System.out.println("Charge: $" + BigDecimal.valueOf(charge).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP));
+
+        //Randomly generate a payment (in cents)
+        int payment = charge + rand.nextInt(10000);
+        System.out.println("Payment: $" + BigDecimal.valueOf(payment).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP));
+        int change = payment - charge;
+        System.out.println("Change due: $" + BigDecimal.valueOf(change).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP));
+
+
+        //Declare the value of currencies (in cents)
+        int pennies = 1, nickels = 5, dimes = 10, quarters = 25, dollars = 100, fives = 500, tens = 1000, twenties = 2000;
+        //Placeholder for the number of currencies
+        int numPennies = 0, numNickels = 0, numDimes = 0, numQuarters = 0, numDollars = 0, numFives = 0, numTens = 0, numTwenties = 0;
+        //Cents left after coins
+        int changeLeft;
+
+        //First, find how many twenties are needed by diving change by twenties
+        numTwenties = change / twenties;
+        //Print out the value, which is how many twenties we will need for the change
+        System.out.println("change / twenties: " + (change / twenties) );
+        //Next, find out how much change is left over after taking the % of twenties, and store it in changeLeft
+        changeLeft = change % twenties;
+        System.out.println("change % twenties: " + (change % twenties));
+        //Repeat for the rest of the currencies
+        numTens = changeLeft / tens;
+        System.out.println("changeLeft / tens: " + (changeLeft / tens) );
+        changeLeft = changeLeft % tens;
+        System.out.println("changeLeft % tens: " + (changeLeft % tens) );
+        numFives = changeLeft / fives;
+        System.out.println("changeLeft / fives: " + (changeLeft / fives) );
+        changeLeft = changeLeft % fives;
+        System.out.println("changeLeft % fives: " + (changeLeft % fives) );
+        numDollars = changeLeft / dollars;
+        System.out.println("changeLeft / dollars: " + (changeLeft / dollars) );
+        changeLeft = changeLeft % dollars;
+        System.out.println("changeLeft % dollars: " + (changeLeft % dollars) );
+        numQuarters = changeLeft / quarters;
+        System.out.println("changeLeft / quarters: " + (changeLeft / quarters) );
+        changeLeft = changeLeft % quarters;
+        System.out.println("changeLeft % quarters: " + (changeLeft % quarters) );
+        numDimes = changeLeft / dimes;
+        System.out.println("changeLeft / dimes: " + (changeLeft / dimes) );
+        changeLeft = changeLeft % dimes;
+        System.out.println("changeLeft % dimes: " + (changeLeft % dimes) );
+        numNickels = changeLeft / nickels;
+        System.out.println("changeLeft / nickels: " + (changeLeft / nickels) );
+        changeLeft = changeLeft % nickels;
+        System.out.println("changeLeft % nickels: " + (changeLeft % nickels) );
+        numPennies = changeLeft / pennies;
+        System.out.println("changeLeft / pennies: " + (changeLeft / pennies) );
+        changeLeft = changeLeft % pennies;
+        System.out.println("changeLeft % pennies: " + (changeLeft % pennies));
+
+        //Print out our final results
+        System.out.println("Your change is " + numTwenties + " twenties, "
+                + numTens + " tens, "
+                + numFives + " fives, "
+                + numDollars + " dollars, "
+                + numQuarters + " quarters, "
+                + numDimes + " dimes, "
+                + numNickels + " nickels, and "
+                + numPennies + " pennies.");
+    }
+}
+
